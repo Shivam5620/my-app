@@ -15,6 +15,7 @@ import {
 import { useAddToCart } from "@/lib/useCart";
 import { getSessionId } from "@/lib/session";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function ProductDetailsPage() {
   const session_id = getSessionId();
@@ -42,7 +43,20 @@ export default function ProductDetailsPage() {
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
-    addToCart({ session_id, quantity: 1, productId: id });
+    addToCart(
+      { session_id, quantity: 1, productId: id },
+      {
+        onSuccess: () => {
+          toast.success("Product added or quantity updated", {
+            duration: 2000,
+            position: "top-right",
+          });
+        },
+        onError: () => {
+          toast.error("Something went wrong while adding to cart");
+        },
+      }
+    );
   };
 
   return (
@@ -82,7 +96,7 @@ export default function ProductDetailsPage() {
                 disabled={isPending}
                 className="w-full"
               >
-                {isPending ? "Adding..." : "Add to Cart"}
+                Add to Cart
               </Button>
             </CardContent>
           </div>

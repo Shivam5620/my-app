@@ -1,12 +1,9 @@
 "use client";
 
 import { BASE_URL } from "@/lib/axios";
-import {
-  useCartItems,
-  useRemoveFromCart,
-  useUpdateCart,
-} from "@/lib/useCart";
+import { useCartItems, useRemoveFromCart, useUpdateCart } from "@/lib/useCart";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export default function CartPage() {
   const { data: cart = [], isLoading } = useCartItems();
@@ -19,9 +16,17 @@ export default function CartPage() {
     updateQuantity({ documentId, quantity: newQty });
   };
 
-  // ✅ Remove cart item
+  // ✅ Remove cart item with toast
   const handleRemove = (documentId: number) => {
-    removeItem(documentId);
+    try {
+      removeItem(documentId, {
+        onSuccess: () => toast.success("Item removed from cart"),
+        onError: () => toast.error("Failed to remove item. Try again."),
+      });
+    } catch (error) {
+      toast.error("Unexpected error. Try again.");
+      console.error("Remove error:", error);
+    }
   };
 
   if (isLoading) return <div className="p-4">Loading cart...</div>;
@@ -69,7 +74,9 @@ export default function CartPage() {
                   >
                     -
                   </button>
-                  <span className="px-3 py-1 border-t border-b">{quantity}</span>
+                  <span className="px-3 py-1 border-t border-b">
+                    {quantity}
+                  </span>
                   <button
                     onClick={() => handleUpdateQty(documentId, quantity + 1)}
                     className="px-2 py-1 border rounded-r hover:bg-gray-100"

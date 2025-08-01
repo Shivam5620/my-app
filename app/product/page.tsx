@@ -21,7 +21,7 @@ export default function ProductPage() {
     queryFn: fetchProducts,
   });
 
-  const { mutate: addToCart, isPending } = useAddToCart();
+  const { mutate: addToCart } = useAddToCart();
 
   if (isLoading) return <div className="p-6">Loading...</div>;
   if (isError)
@@ -37,7 +37,6 @@ export default function ProductPage() {
             product={product}
             session_id={session_id}
             addToCart={addToCart}
-            isPending={isPending}
             onNavigate={() => router.push(`/product/${product.documentId}`)}
           />
         ))}
