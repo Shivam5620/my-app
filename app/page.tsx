@@ -1,5 +1,5 @@
 import { NavigationMenu } from "./component/navbar/Header";
-import ProductPage from "./products/page";
+import ProductPage from "./product/page";
 
 export default function Home() {
   return (

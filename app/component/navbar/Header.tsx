@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { ShoppingCartIcon } from "lucide-react";
-import { useCart } from "@/lib/useCart";
+import { useCartItems } from "@/lib/useCart";
 
 export function NavigationMenu() {
-  const { cart } = useCart();
+  const { data: cart = [] } = useCartItems(); // fetch from React Query
 
   return (
     <nav className="flex items-center justify-between px-8 py-2 bg-white shadow">
