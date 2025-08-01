@@ -33,7 +33,10 @@ export default function ProductCard({
       quantity: 1,
       productId: product.id,
     });
-    toast.success("Product added to cart");
+    toast.success("PProduct Added to cart Successfully", {
+      duration: 2000,
+      position: "top-right",
+    });
   };
 
   return (
