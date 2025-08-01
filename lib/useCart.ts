@@ -13,11 +13,36 @@ export const useCartItems = () =>
   });
 
 // add to cart function
+
 export const useAddToCart = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: addCartItem,
+    mutationFn: async ({
+      session_id,
+      quantity,
+      productId,
+    }: {
+      session_id: string;
+      quantity: number;
+      productId: number;
+    }) => {
+      const cartItems = await fetchCartItems();
+      const existingItem = cartItems.find(
+        (item: any) =>
+          item.session_id === session_id && item.product?.id === productId
+      );
+
+      if (existingItem) {
+        return updateCartItem(
+          existingItem.documentId,
+          existingItem.quantity + quantity
+        );
+      } else {
+        // 👇 add new item if not in cart
+        return addCartItem({ session_id, quantity, productId });
+      }
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
