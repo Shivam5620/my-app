@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { Button } from "@/components/ui/button";
 
 export function Banner() {
   const [api, setApi] = React.useState<CarouselApi>();
@@ -77,9 +78,9 @@ export function Banner() {
                     <p className="text-sm md:text-base mt-2 text-yellow-800 font-medium">
                       {banner.description}
                     </p>
-                    <button className="mt-4 bg-yellow-300 text-yellow-900 font-semibold px-5 py-2 rounded-full shadow hover:bg-yellow-300 transition">
+                    <Button className="mt-4 bg-yellow-300 text-yellow-900 font-semibold px-5 py-2 rounded-full shadow hover:bg-yellow-300 transition">
                       Shop Now
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>

@@ -97,7 +97,7 @@ export function NavigationMenu() {
               </Link>
               <Link
                 href=""
-                className="block px-2 py-2 text-red-500 hover:bg-gray-100 rounded"
+                className="block px-2 py-2 text-yellow-300 hover:bg-gray-100 rounded"
               >
                 Logout
               </Link>
