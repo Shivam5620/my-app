@@ -16,6 +16,7 @@ import { useAddToCart } from "@/lib/useCart";
 import { getSessionId } from "@/lib/session";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProductDetailsPage() {
   const session_id = getSessionId();
@@ -32,11 +33,36 @@ export default function ProductDetailsPage() {
 
   const { mutate: addToCart, isPending } = useAddToCart();
 
-  if (isLoading) return <div className="p-6">Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <Card>
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Skeleton for Image */}
+            <Skeleton className="h-[400px] w-full rounded-md" />
+
+            {/* Skeleton for Content */}
+            <div className="flex flex-col justify-between space-y-4">
+              <CardHeader className="p-0 space-y-3">
+                <Skeleton className="h-8 w-3/4" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-5/6" />
+              </CardHeader>
+
+              <CardContent className="p-0 space-y-4">
+                <Skeleton className="h-6 w-24" />
+                <Skeleton className="h-10 w-full rounded" />
+              </CardContent>
+            </div>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   if (isError || !product) return notFound();
 
   const { id, Title, Description, Price, Image: images = [] } = product;
-
   const img = images[0];
   const imageUrl = img?.formats?.medium?.url || img?.url || "";
   const altText = img?.alternativeText || Title;
@@ -47,7 +73,7 @@ export default function ProductDetailsPage() {
       { session_id, quantity: 1, productId: id },
       {
         onSuccess: () => {
-          toast.success("Product added or quantity updated", {
+          toast.success("Product added to cart successfully", {
             duration: 2000,
             position: "top-right",
           });

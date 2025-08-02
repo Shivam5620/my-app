@@ -1,13 +1,5 @@
-export interface CartItem {
-  id: number;
-  productId: number;
+export interface ICart {
+  session_id: string;
   quantity: number;
-  title: string;
-  price: number;
-  image: string;
-}
-
-export interface CartStore {
-  cart: CartItem[];
-  setCart: (cart: CartItem[]) => void;
+  productId: number;
 }

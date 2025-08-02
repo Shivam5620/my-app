@@ -17,8 +17,6 @@ export async function addCartItem({
       product: productId,
     },
   });
-
-  console.log("✅ Cart item added:", res.data);
   return res.data;
 }
 
@@ -46,15 +44,11 @@ export async function updateCartItem(documentId: number, quantity: number) {
       quantity,
     },
   });
-
-  console.log("✅ Cart item updated:", res.data);
   return res.data;
 }
 
 // remove cart item
 export async function removeCartItem(documentId: number) {
   const res = await Ax.delete(`/api/carts/${documentId}`);
-
-  console.log("✅ Cart item removed:", res.data);
   return res.data;
 }

@@ -1,25 +1,25 @@
-export interface ProductImageFormat {
+export interface IProductImageFormat {
   url: string;
 }
 
-export interface ProductImage {
+export interface IProductImage {
   id: number;
   url: string;
   alternativeText?: string | null;
   caption?: string | null;
   formats?: {
-    thumbnail?: ProductImageFormat;
-    small?: ProductImageFormat;
-    medium?: ProductImageFormat;
-    large?: ProductImageFormat;
+    thumbnail?: IProductImageFormat;
+    small?: IProductImageFormat;
+    medium?: IProductImageFormat;
+    large?: IProductImageFormat;
   };
 }
 
-export interface Product {
+export interface IProduct {
   id: number;
   Title: string;
   Description: string;
   Price: number;
   documentId: string;
-  Image?: ProductImage[];
+  Image?: IProductImage[];
 }
