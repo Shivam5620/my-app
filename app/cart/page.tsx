@@ -96,6 +96,40 @@ export default function CartPage() {
     0
   );
 
+ const handlePlaceOrder = async () => {
+  try {
+    const payload = cart.map((item: any) => ({
+      name: item.product?.Title || "Unnamed Product",
+      price: Number(item.product?.Price || 0),
+      quantity: Number(item.quantity || 1),
+    }));
+
+    const total = payload.reduce((acc: number, item: any) => {
+      return acc + item.price * item.quantity;
+    }, 0);
+
+    const res = await fetch(`${BASE_URL}/api/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cart: payload, totalPrice: total }),
+    });
+
+    const data = await res.json();
+
+    if (data?.url) {
+      window.location.href = data.url;
+    } else {
+      toast.error("Failed to redirect to payment");
+    }
+  } catch (error) {
+    console.error("Checkout Error:", error);
+    toast.error("Something went wrong while placing order");
+  }
+};
+
+
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Your Shopping Cart</h1>
@@ -173,7 +207,10 @@ export default function CartPage() {
             <span>₹{totalPrice}</span>
           </div>
 
-          <button className="w-full mt-6 bg-black hover:bg-gray-800 text-white font-semibold py-2 rounded">
+          <button
+            className="w-full mt-6 bg-black hover:bg-gray-800 text-white font-semibold py-2 rounded"
+            onClick={handlePlaceOrder}
+          >
             Place Order
           </button>
         </div>
