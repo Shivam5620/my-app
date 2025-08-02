@@ -17,10 +17,15 @@ import { getSessionId } from "@/lib/session";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useState } from "react";
+import clsx from "clsx";
+
+const AVAILABLE_SIZES = ["6", "7", "8", "9", "10", "11"];
 
 export default function ProductDetailsPage() {
   const session_id = getSessionId();
   const { documentId } = useParams() as { documentId: string };
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const {
     data: product,
@@ -38,17 +43,13 @@ export default function ProductDetailsPage() {
       <div className="max-w-4xl mx-auto p-6">
         <Card>
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Skeleton for Image */}
             <Skeleton className="h-[400px] w-full rounded-md" />
-
-            {/* Skeleton for Content */}
             <div className="flex flex-col justify-between space-y-4">
               <CardHeader className="p-0 space-y-3">
                 <Skeleton className="h-8 w-3/4" />
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-5/6" />
               </CardHeader>
-
               <CardContent className="p-0 space-y-4">
                 <Skeleton className="h-6 w-24" />
                 <Skeleton className="h-10 w-full rounded" />
@@ -69,6 +70,11 @@ export default function ProductDetailsPage() {
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
+    if (!selectedSize) {
+      toast.warning("Please select a size");
+      return;
+    }
+
     addToCart(
       { session_id, quantity: 1, productId: id },
       {
@@ -114,15 +120,36 @@ export default function ProductDetailsPage() {
               </CardDescription>
             </CardHeader>
 
-            <CardContent className="p-0 mt-4 space-y-4">
+            <CardContent className="p-0 mt-4 space-y-6">
               <p className="text-xl font-semibold text-green-700">₹{Price}</p>
+
+              {/* Size Selector */}
+              <div>
+                <p className="text-sm font-medium mb-2">Select Size (UK)</p>
+                <div className="flex flex-wrap gap-2">
+                  {AVAILABLE_SIZES.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={clsx(
+                        "w-10 h-10 rounded-full border border-gray-300 text-sm flex items-center justify-center transition-all",
+                        selectedSize === size
+                          ? "bg-yellow-400 text-black border-yellow-500 font-bold"
+                          : "bg-white hover:bg-yellow-100"
+                      )}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               <Button
                 onClick={handleAddToCart}
-                disabled={isPending}
-                className="w-full"
+                disabled={isPending || !selectedSize}
+                className="w-full cursor-pointer bg-amber-300 text-black hover:bg-yellow-400 transition"
               >
-                Add to Cart
+                {isPending ? "Adding..." : "Add to Cart"}
               </Button>
             </CardContent>
           </div>
