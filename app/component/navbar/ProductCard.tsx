@@ -1,3 +1,4 @@
+// component/navbar/ProductCard.tsx
 "use client";
 
 import Image from "next/image";
@@ -5,17 +6,14 @@ import { BASE_URL } from "@/lib/axios";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Product } from "@/types/product";
+import { IProduct } from "@/types/product";
+import { ICart } from "@/types/cart";
 
 interface ProductCardProps {
-  product: Product;
+  product: IProduct;
   session_id: string;
   onNavigate: () => void;
-  addToCart: (payload: {
-    session_id: string;
-    quantity: number;
-    productId: number;
-  }) => void;
+  addToCart: (payload: ICart) => void; 
 }
 
 export default function ProductCard({
@@ -33,7 +31,7 @@ export default function ProductCard({
       quantity: 1,
       productId: product.id,
     });
-    toast.success("PProduct Added to cart Successfully", {
+    toast.success("Product Added to cart Successfully", {
       duration: 2000,
       position: "top-right",
     });
@@ -41,7 +39,6 @@ export default function ProductCard({
 
   return (
     <Card className="h-[420px] flex flex-col hover:shadow-lg hover:scale-[1.01] transition-transform duration-200">
-      {/* Product Image */}
       <div
         className="group relative w-full h-[240px] overflow-hidden rounded-t-md cursor-pointer"
         onClick={onNavigate}
@@ -60,7 +57,6 @@ export default function ProductCard({
         )}
       </div>
 
-      {/* Product Info */}
       <CardContent className="flex-1 p-4 flex flex-col gap-2">
         <CardTitle className="text-base font-semibold line-clamp-1">
           {product.Title}

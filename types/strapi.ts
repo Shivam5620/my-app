@@ -1,6 +1,6 @@
 // types/strapi.ts
 
-export interface StrapiResponse<T> {
+export interface IStrapiResponse<T> {
   data: T;
   meta?: {
     pagination?: {
