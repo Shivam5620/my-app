@@ -79,7 +79,7 @@ export function Banner() {
                       {banner.description}
                     </p>
                     <Button className="mt-4 bg-yellow-300 text-yellow-900 font-semibold px-5 py-2 rounded-full shadow hover:bg-yellow-300 transition">
-                      More Products{" "}
+                      Scroll More Products{" "}
                     </Button>
                   </div>
                 </div>

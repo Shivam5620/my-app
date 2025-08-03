@@ -142,7 +142,7 @@ export default function CartPage() {
                       {product?.Title}
                     </CardTitle>
                   </CardHeader>
-                  <p className="text-sm text-muted-foreground mb-1">
+                  <p className="text-sm text-muted-foreground mb-1 line-clamp-2">
                     ₹{product?.Description}
                   </p>
                   <p className="text-sm font-semibold mb-2">
