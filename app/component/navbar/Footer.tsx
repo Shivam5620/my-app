@@ -6,8 +6,7 @@ import Image from "next/image";
 export function Footer() {
   return (
     <footer className="bg-yellow-100 text-black py-8 mt-12">
-     <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-left ml-16">
-
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-left ml-16">
         {/* Brand */}
         <div>
           <h2 className="text-2xl font-bold mb-2">ShoeStyle</h2>
@@ -15,7 +14,7 @@ export function Footer() {
             Professional shoes crafted for comfort, style, and confidence.
           </p>
           <Image
-            src="/logo.png"
+            src="/assets/cart_bag.jpg"
             alt="ShoeStyle Logo"
             width={100}
             height={100}
