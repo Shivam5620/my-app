@@ -16,12 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-gradient-to-r from-yellow-300 to-yellow-500 p-6 text-black rounded-lg">
         <Providers>
           <NavigationMenu />
-          <Banner/>
           {children}
            <Toaster />
+          <Banner/>
            <Footer/>
         </Providers>
       </body>

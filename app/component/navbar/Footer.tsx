@@ -6,7 +6,8 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-yellow-100 text-black py-8 mt-12">
+   <footer className="bg-gradient-to-r from-yellow-300 to-yellow-500 p-6 text-black rounded-lg py-8 mt-12">
+
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-left ml-16">
         {/* Brand */}
         <div>
@@ -15,10 +16,10 @@ export function Footer() {
             Professional shoes crafted for comfort, style, and confidence.
           </p>
           <Image
-            src="/assets/cart_bag.jpg"
+            src="/assets/cart_bag.png"
             alt="ShoeStyle Logo"
-            width={100}
-            height={100}
+            width={80}
+            height={80}
             className="mx-auto md:mx-0 mt-4"
           />
         </div>
@@ -74,7 +75,7 @@ export function Footer() {
       </div>
 
       {/* Bottom Note */}
-      <div className="border-t border-yellow-300 mt-8 pt-4 text-center text-xs text-yellow-700">
+      <div className="border-t border-yellow-300 mt-8 pt-4 text-center text-xs text-black">
         &copy; {new Date().getFullYear()} ShoeStyle. All rights reserved.
       </div>
     </footer>

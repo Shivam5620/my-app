@@ -93,7 +93,7 @@ export default function CartPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px] p-6 text-center">
         <Image
-          src="/assets/cart_bag.jpg"
+          src="/assets/cart_bag.png"
           alt="Empty Cart"
           width={120}
           height={120}
@@ -107,7 +107,7 @@ export default function CartPage() {
         </p>
         <Button
           onClick={() => (window.location.href = "/")}
-          className="bg-amber-300 text-black hover:bg-amber-400"
+          className="bg-white text-black hover:bg-gray-100 cursor-pointer"
         >
           Add Items from Products
         </Button>

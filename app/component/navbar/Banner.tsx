@@ -53,8 +53,8 @@ export function Banner() {
   }, [api]);
 
   return (
-    <div className="w-screen px-4 py-4 bg-yellow-50">
-      <Carousel setApi={setApi} className="w-full">
+    <div className=" px-4 py-4 bg-gradient-to-r from-yellow-300 to-yellow-500 p-6 text-black rounded-lg">
+      <Carousel setApi={setApi} opts={{ loop: true }} className="w-full">
         <CarouselContent className="-mx-2">
           {banners.map((banner, index) => (
             <CarouselItem key={index} className="mx-2">
@@ -79,7 +79,7 @@ export function Banner() {
                       {banner.description}
                     </p>
                     <Button className="mt-4 bg-yellow-300 text-yellow-900 font-semibold px-5 py-2 rounded-full shadow hover:bg-yellow-300 transition">
-                      Shop Now
+                      More Products{" "}
                     </Button>
                   </div>
                 </div>
@@ -87,8 +87,6 @@ export function Banner() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
     </div>
   );
