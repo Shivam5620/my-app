@@ -146,7 +146,6 @@ export default function ProductDetailsPage() {
 
               <Button
                 onClick={handleAddToCart}
-                disabled={isPending || !selectedSize}
                 className="w-full cursor-pointer bg-amber-300 text-black hover:bg-yellow-400 transition"
               >
                 {isPending ? "Adding..." : "Add to Cart"}

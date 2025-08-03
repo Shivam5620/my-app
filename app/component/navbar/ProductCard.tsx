@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { IProduct } from "@/types/product";
 import { ICart } from "@/types/cart";
 import { useEffect, useRef, useState } from "react";
+import { Heart } from "lucide-react";
 
 interface ProductCardProps {
   product: IProduct;
@@ -89,14 +90,23 @@ export default function ProductCard({
 
         <p className="text-sm font-medium text-foreground">₹{product.Price}</p>
 
-        <Button
-          variant="default"
-          size="sm"
-          className="mt-auto text-xs bg-amber-300 hover:bg-amber-400 text-black cursor-pointer"
-          onClick={handleAddToCart}
-        >
-          Add to Cart
-        </Button>
+        <div className="mt-auto flex items-center justify-between gap-2">
+          <Button
+            variant="default"
+            size="sm"
+            className="flex-1 text-xs bg-amber-300 hover:bg-amber-400 text-black"
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            className="border-gray-300 hover:bg-gray-100"
+          >
+            <Heart className="w-4 h-4 text-gray-500" />
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

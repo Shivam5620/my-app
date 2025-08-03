@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCartIcon, CircleUser , Heart, Search } from "lucide-react";
+import { ShoppingCartIcon, CircleUser, Heart, Search } from "lucide-react";
 import { useCartItems } from "@/lib/useCart";
 import {
   Popover,

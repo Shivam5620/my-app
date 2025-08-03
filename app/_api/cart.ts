@@ -52,3 +52,10 @@ export async function removeCartItem(documentId: number) {
   const res = await Ax.delete(`/api/carts/${documentId}`);
   return res.data;
 }
+
+// clear cart
+export async function clearCart(session_id: string) {
+  if (!session_id) return;
+  const res = await Ax.delete(`/api/carts/clear/${session_id}`);
+  return res.data;
+}

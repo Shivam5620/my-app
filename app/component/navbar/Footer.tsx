@@ -6,7 +6,8 @@ import Image from "next/image";
 export function Footer() {
   return (
     <footer className="bg-yellow-100 text-black py-8 mt-12">
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+     <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-left ml-16">
+
         {/* Brand */}
         <div>
           <h2 className="text-2xl font-bold mb-2">ShoeStyle</h2>
@@ -23,7 +24,7 @@ export function Footer() {
         </div>
 
         {/* Navigation */}
-        <div>
+        <div className="mt-4 md:mt-0">
           <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
           <ul className="space-y-1 text-sm">
             <li>

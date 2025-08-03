@@ -72,3 +72,19 @@ export const useRemoveFromCart = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["cart"] }),
   });
 };
+
+// clear cart function
+export const useClearCart = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (session_id: string) => {
+      if (!session_id) return;
+      return await fetch(`/api/carts/clear/${session_id}`, {
+        method: "DELETE",
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+    },
+  });
+};
