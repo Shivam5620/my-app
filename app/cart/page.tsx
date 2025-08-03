@@ -105,8 +105,10 @@ export default function CartPage() {
         <p className="text-sm text-gray-500 mb-4">
           There's nothing in your bag. Let's add some items.
         </p>
-        <Button onClick={() => (window.location.href = "/")}
-          className="bg-amber-300 text-black hover:bg-amber-400">
+        <Button
+          onClick={() => (window.location.href = "/")}
+          className="bg-amber-300 text-black hover:bg-amber-400"
+        >
           Add Items from Products
         </Button>
       </div>
@@ -213,7 +215,10 @@ export default function CartPage() {
               <span>₹{totalPrice}</span>
             </div>
 
-            <Button className="w-full mt-4 cursor-pointer bg-amber-300 text-black" onClick={handlePlaceOrder}>
+            <Button
+              className="w-full mt-4 ml-auto bg-amber-300 text-black hover:bg-yellow-400 transition-colors duration-200"
+              onClick={handlePlaceOrder}
+            >
               Place Order
             </Button>
           </CardContent>
