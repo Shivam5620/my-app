@@ -2,6 +2,7 @@
 
 import { Facebook, Instagram, Twitter, Mail } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -27,24 +28,24 @@ export function Footer() {
           <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
           <ul className="space-y-1 text-sm">
             <li>
-              <a href="/" className="hover:underline">
+              <Link href="/" className="hover:underline">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/products" className="hover:underline">
+              <Link href="/products" className="hover:underline">
                 Products
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/about" className="hover:underline">
+              <Link href="/about" className="hover:underline">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/contact" className="hover:underline">
+              <Link href="/contact" className="hover:underline">
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -53,21 +54,21 @@ export function Footer() {
         <div>
           <h3 className="text-lg font-semibold mb-2">Connect With Us</h3>
           <div className="flex justify-center md:justify-start gap-4 mt-2">
-            <a href="#" className="hover:text-yellow-700">
+            <Link href="#" className="hover:text-yellow-700">
               <Facebook size={20} />
-            </a>
-            <a href="#" className="hover:text-yellow-700">
+            </Link>
+            <Link href="#" className="hover:text-yellow-700">
               <Instagram size={20} />
-            </a>
-            <a href="#" className="hover:text-yellow-700">
+            </Link>
+            <Link href="#" className="hover:text-yellow-700">
               <Twitter size={20} />
-            </a>
-            <a
+            </Link>
+            <Link
               href="mailto:info@shoestyle.com"
               className="hover:text-yellow-700"
             >
               <Mail size={20} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
