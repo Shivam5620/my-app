@@ -27,7 +27,6 @@ export default function ProductPage() {
   if (isLoading) {
     return (
       <div className="p-6 max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">Products</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 py-2">
           {Array.from({ length: 8 }).map((_, index) => (
             <div key={index} className="space-y-2">
@@ -43,12 +42,11 @@ export default function ProductPage() {
   }
 
   if (isError) {
-    return <div className="p-6 text-red-600">Failed to load products</div>;
+    return <div className="p-6 text-red-600">No products</div>;
   }
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Products</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 py-2">
         {products.map((product) => (
           <ProductCard
