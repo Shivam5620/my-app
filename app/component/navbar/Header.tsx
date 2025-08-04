@@ -14,7 +14,6 @@ export function NavigationMenu() {
 
   return (
     <nav className="sticky top-0 z-50 flex items-center justify-between px-8 py-2 bg-white shadow">
-
       {/* Logo */}
       <Link
         href="/"

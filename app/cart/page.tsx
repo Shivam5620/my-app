@@ -1,13 +1,14 @@
 "use client";
 
-import { BASE_URL } from "@/lib/axios";
-import { useCartItems, useRemoveFromCart, useUpdateCart } from "@/lib/useCart";
 import Image from "next/image";
 import { toast } from "sonner";
-import { Skeleton } from "@/components/ui/skeleton";
+import { BASE_URL } from "@/lib/axios";
+import { useCartItems, useRemoveFromCart, useUpdateCart } from "@/lib/useCart";
+import { placeOrder } from "../_api/checkout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CartPage() {
   const { data: cart = [], isLoading } = useCartItems();
@@ -22,18 +23,13 @@ export default function CartPage() {
   const handleRemove = (documentId: number) => {
     removeItem(documentId, {
       onSuccess: () =>
-        toast.success("Product Removed from cart successfully", {
+        toast.success("Product removed from cart successfully", {
           duration: 2000,
           position: "top-right",
         }),
       onError: () => toast.error("Failed to remove item. Try again."),
     });
   };
-
-  const totalPrice = cart.reduce(
-    (acc: number, item: any) => acc + item.product?.Price * item.quantity,
-    0
-  );
 
   const handlePlaceOrder = async () => {
     try {
@@ -43,26 +39,16 @@ export default function CartPage() {
         quantity: Number(item.quantity || 1),
       }));
 
-      const total = payload.reduce(
-        (acc: number, item: any) => acc + item.price * item.quantity,
-        0
-      );
+      const data = await placeOrder(payload);
 
-      const res = await fetch(`${BASE_URL}/api/checkout`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cart: payload, totalPrice: total }),
-      });
-
-      const data = await res.json();
       if (data?.url) {
         window.location.href = data.url;
       } else {
         toast.error("Failed to redirect to payment");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Checkout Error:", error);
-      toast.error("Something went wrong while placing order");
+      toast.error(error.message || "Something went wrong while placing order");
     }
   };
 
@@ -78,9 +64,9 @@ export default function CartPage() {
               <Skeleton className="h-4 w-1/2" />
               <Skeleton className="h-4 w-1/4" />
               <div className="flex gap-2 mt-2">
-                <Skeleton className="h-8 w-8" />
-                <Skeleton className="h-8 w-8" />
-                <Skeleton className="h-8 w-8" />
+                {[1, 2, 3].map((key) => (
+                  <Skeleton key={key} className="h-8 w-8" />
+                ))}
               </div>
             </div>
           </Card>
@@ -105,10 +91,9 @@ export default function CartPage() {
         <p className="text-sm text-gray-500 mb-4">
           There&apos;s nothing in your bag. Let&apos;s add some items.
         </p>
-
         <Button
           onClick={() => (window.location.href = "/")}
-          className="bg-white text-black hover:bg-gray-100 cursor-pointer"
+          className="bg-white text-black hover:bg-gray-100"
         >
           Add Items from Products
         </Button>
@@ -116,11 +101,15 @@ export default function CartPage() {
     );
   }
 
+  const totalPrice = cart.reduce(
+    (acc: number, item: any) => acc + item.product?.Price * item.quantity,
+    0
+  );
+
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Your Shopping Cart</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Left - Cart Items */}
         <div className="md:col-span-2 space-y-4">
           {cart.map((item: any) => {
             const { documentId, quantity, product } = item;
@@ -183,14 +172,12 @@ export default function CartPage() {
           })}
         </div>
 
-        {/* Right - Price Summary */}
         <Card className="h-fit p-4 space-y-4">
           <CardHeader className="p-0">
             <CardTitle className="text-lg font-bold">Price Summary</CardTitle>
           </CardHeader>
 
           <CardContent className="p-0 space-y-4">
-            {/* Individual Product Rows */}
             {cart.map((item: any) => (
               <div
                 key={item.documentId}
@@ -210,7 +197,6 @@ export default function CartPage() {
 
             <Separator />
 
-            {/* Total */}
             <div className="flex justify-between text-base font-medium">
               <span>Total</span>
               <span>₹{totalPrice}</span>

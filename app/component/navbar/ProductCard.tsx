@@ -85,11 +85,8 @@ export default function ProductCard({
         <CardTitle className="text-sm font-semibold line-clamp-1">
           {product.Title}
         </CardTitle>
-
         <p className="text-xs line-clamp-2">{product.Description}</p>
-
         <p className="text-sm font-medium text-foreground">₹{product.Price}</p>
-
         <div className="mt-auto flex items-center justify-between gap-2">
           <Button
             variant="default"
