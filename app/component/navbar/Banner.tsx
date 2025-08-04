@@ -62,13 +62,6 @@ export function Banner() {
                 {/* Decorative Yellow Rings */}
                 <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full border-4 border-yellow-400 z-10"></div>
                 <div className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full border-4 border-yellow-400 z-10"></div>
-
-                {/* Image */}
-                <img
-                  alt={banner.title}
-                  className="h-full w-full object-cover rounded-2xl"
-                />
-
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-yellow-100/70 backdrop-blur-sm flex items-center justify-center text-center rounded-2xl p-6">
                   <div>

@@ -103,8 +103,9 @@ export default function CartPage() {
           Hey, it feels so light!
         </h2>
         <p className="text-sm text-gray-500 mb-4">
-          There's nothing in your bag. Let's add some items.
+          There&apos;s nothing in your bag. Let&apos;s add some items.
         </p>
+
         <Button
           onClick={() => (window.location.href = "/")}
           className="bg-white text-black hover:bg-gray-100 cursor-pointer"
