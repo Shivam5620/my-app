@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { IProduct } from "@/types/product";
 import { ICart } from "@/types/cart";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Heart } from "lucide-react";
 
 interface ProductCardProps {
@@ -34,12 +34,12 @@ export default function ProductCard({
       setCurrentImageIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 1500); // Smooth transition every 1.5s
+    }, 1500);
   };
 
   const stopImageRotation = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
-    setCurrentImageIndex(0); // Reset to first image
+    setCurrentImageIndex(0);
   };
 
   const handleAddToCart = () => {
@@ -55,14 +55,13 @@ export default function ProductCard({
   };
 
   return (
-    <Card className="h-[420px] flex flex-col hover:shadow-lg hover:scale-[1.01] transition-transform duration-200">
+    <Card className="h-[360px] max-w-sm w-full flex flex-col hover:shadow-lg hover:scale-[1.01] transition-transform duration-200">
       <div
         className="group relative w-full h-[240px] overflow-hidden rounded-t-md cursor-pointer"
         onMouseEnter={startImageRotation}
         onMouseLeave={stopImageRotation}
         onClick={onNavigate}
       >
-        {/* Image Slider with fade */}
         {images.map((img, i) => {
           const imageUrl = img?.formats?.medium?.url || img?.url || "";
           return (
@@ -71,22 +70,23 @@ export default function ProductCard({
               src={`${BASE_URL}${imageUrl}`}
               alt={img?.alternativeText || product.Title}
               fill
-              className={`absolute top-0 left-0 w-full h-full object-cover rounded-t-md transition-opacity duration-700 ${
-                i === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-              }`}
+              className={`absolute top-0 left-0 w-full h-full object-cover rounded-t-md transition-all duration-700 ease-in-out transform 
+          ${
+            i === currentImageIndex
+              ? "opacity-100 z-10 group-hover:scale-105 group-hover:brightness-90"
+              : "opacity-0 z-0"
+          }`}
             />
           );
         })}
       </div>
 
-      <CardContent className="flex-1 p-4 flex flex-col gap-2">
-        <CardTitle className="text-base font-semibold line-clamp-1">
+      <CardContent className="flex-1 p-4 flex flex-col gap-1">
+        <CardTitle className="text-sm font-semibold line-clamp-1">
           {product.Title}
         </CardTitle>
 
-        <p className="text-sm text-muted-foreground line-clamp-2">
-          {product.Description}
-        </p>
+        <p className="text-xs line-clamp-2">{product.Description}</p>
 
         <p className="text-sm font-medium text-foreground">₹{product.Price}</p>
 
@@ -94,7 +94,7 @@ export default function ProductCard({
           <Button
             variant="default"
             size="sm"
-            className="flex-1 text-xs bg-amber-300 hover:bg-amber-400 text-black"
+            className="flex-1 text-xs cursor-pointer bg-white hover:bg-amber-400 text-black border border-gray-300 hover:border-black transition-colors"
             onClick={handleAddToCart}
           >
             Add to Cart

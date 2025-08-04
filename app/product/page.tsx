@@ -8,6 +8,8 @@ import { fetchProducts } from "../_api/product";
 import { getSessionId } from "@/lib/session";
 import ProductCard from "../component/navbar/ProductCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { Frown } from "lucide-react"; // icon for empty state
 
 export default function ProductPage() {
   const router = useRouter();
@@ -42,7 +44,17 @@ export default function ProductPage() {
   }
 
   if (isError) {
-    return <div className="p-6 text-red-600">No products</div>;
+    return <div className="p-6 text-red-600">Failed to fetch products. Please try again later.</div>;
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className="p-6 max-w-6xl mx-auto text-center space-y-4">
+        <Frown className="mx-auto h-10 w-10 text-gray-500" />
+        <h2 className="text-xl font-semibold">No products found</h2>
+        <p className="text-gray-600">Check back later or explore other categories.</p>
+      </div>
+    );
   }
 
   return (
