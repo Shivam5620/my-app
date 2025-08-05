@@ -10,6 +10,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 
 export function Banner() {
   const [api, setApi] = React.useState<CarouselApi>();
@@ -71,8 +72,8 @@ export function Banner() {
                     <p className="text-sm md:text-base mt-2 text-yellow-800 font-medium">
                       {banner.description}
                     </p>
-                    <Button className="mt-4 bg-yellow-300 text-yellow-900 font-semibold px-5 py-2 rounded-full shadow hover:bg-yellow-300 transition">
-                      Scroll More Products{" "}
+                    <Button className="mt-4 bg-white text-black font-semibold px-5 py-2 rounded-full shadow hover:bg-yellow-300 transition gap-2">
+                      Scroll More Products <ChevronDown className="w-4 h-4" />
                     </Button>
                   </div>
                 </div>
