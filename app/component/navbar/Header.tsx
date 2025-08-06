@@ -9,6 +9,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { useSearchStore } from "@/lib/store/searchStore";
+import { Input } from "@/components/ui/input";
 
 export function Header() {
   const { data: cart = [] } = useCartItems();
@@ -27,7 +28,7 @@ export function Header() {
       {/* Search Box */}
       <div className="relative flex-1 w-full sm:w-auto sm:flex-1 mx-0 sm:mx-6">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-        <input
+        <Input
           type="search"
           placeholder="Search products..."
           className="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none "
