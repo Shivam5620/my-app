@@ -4,6 +4,7 @@ import {
   addCartItem,
   updateCartItem,
   removeCartItem,
+  clearCart,
 } from "@/app/_api/cart";
 
 export const useCartItems = () =>
@@ -39,7 +40,7 @@ export const useAddToCart = () => {
           existingItem.quantity + quantity
         );
       } else {
-        // 👇 add new item if not in cart
+        //  add new item if not in cart
         return addCartItem({ session_id, quantity, productId });
       }
     },
@@ -77,12 +78,7 @@ export const useRemoveFromCart = () => {
 export const useClearCart = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (session_id: string) => {
-      if (!session_id) return;
-      return await fetch(`/api/carts/clear/${session_id}`, {
-        method: "DELETE",
-      });
-    },
+    mutationFn: clearCart,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },

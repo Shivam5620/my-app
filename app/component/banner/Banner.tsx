@@ -56,9 +56,9 @@ export function Banner() {
   return (
     <div className=" px-4 py-4 bg-gradient-to-r from-yellow-300 to-yellow-500 p-6 text-black rounded-lg">
       <Carousel setApi={setApi} opts={{ loop: true }} className="w-full">
-        <CarouselContent className="-mx-2">
+        <CarouselContent className="-mx-1">
           {banners.map((banner, index) => (
-            <CarouselItem key={index} className="mx-2">
+            <CarouselItem key={index} className="mx-1">
               <div className="relative h-64 w-full overflow-hidden rounded-2xl shadow-xl">
                 {/* Decorative Yellow Rings */}
                 <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full border-4 border-yellow-400 z-10"></div>

@@ -55,7 +55,7 @@ export default function ProductCard({
   };
 
   return (
-    <Card className="h-[360px] max-w-sm w-full flex flex-col hover:shadow-lg hover:scale-[1.01] transition-transform duration-200">
+    <Card className="h-[420px] max-w-sm w-full flex flex-col hover:shadow-lg hover:scale-[1.01] transition-transform duration-200">
       <div
         className="group relative w-full h-[240px] overflow-hidden rounded-t-md cursor-pointer"
         onMouseEnter={startImageRotation}

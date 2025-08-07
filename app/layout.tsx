@@ -1,9 +1,9 @@
 import { Providers } from "@/lib/Providers";
 import "./globals.css";
-import { NavigationMenu } from "./component/navbar/Header";
+import { Header } from "./component/navbar/Header";
 import { Toaster } from "@/components/ui/sonner";
-import { Banner } from "./component/navbar/Banner";
-import { Footer } from "./component/navbar/Footer";
+import { Banner } from "./component/banner/Banner";
+import { Footer } from "./component/footer/Footer";
 import { Inter, Philosopher } from "next/font/google";
 
 export const metadata = {
@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`${philosopher.className} bg-gradient-to-r from-yellow-300 to-yellow-500 p-6 text-black rounded-lg`}
       >
         <Providers>
-          <NavigationMenu />
+          <Header />
           <Banner />
           {children}
           <Toaster />

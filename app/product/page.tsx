@@ -6,14 +6,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useAddToCart } from "@/lib/useCart";
 import { fetchProducts } from "../_api/product";
 import { getSessionId } from "@/lib/session";
-import ProductCard from "../component/navbar/ProductCard";
+import ProductCard from "../component/productCard/ProductCard";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
-import { Frown } from "lucide-react"; // icon for empty state
+import { Frown } from "lucide-react";
+import { useSearchStore } from "@/lib/store/searchStore";
 
 export default function ProductPage() {
   const router = useRouter();
   const session_id = useMemo(() => getSessionId(), []);
+  const { query } = useSearchStore();
 
   const {
     data: products = [],
@@ -25,6 +26,13 @@ export default function ProductPage() {
   });
 
   const { mutate: addToCart } = useAddToCart();
+
+  //  Filter products by search query
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      product.Title.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [products, query]);
 
   if (isLoading) {
     return (
@@ -44,15 +52,15 @@ export default function ProductPage() {
   }
 
   if (isError) {
-    return <div className="p-6 text-red-600">Failed to fetch products. Please try again later.</div>;
+    return <div className="p-6 text-red-600">Failed to fetch products.</div>;
   }
 
-  if (products.length === 0) {
+  if (filteredProducts.length === 0) {
     return (
       <div className="p-6 max-w-6xl mx-auto text-center space-y-4">
         <Frown className="mx-auto h-10 w-10 text-gray-500" />
         <h2 className="text-xl font-semibold">No products found</h2>
-        <p className="text-gray-600">Check back later or explore other categories.</p>
+        <p className="text-gray-600">Try a different keyword.</p>
       </div>
     );
   }
@@ -60,7 +68,7 @@ export default function ProductPage() {
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 py-2">
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
             product={product}
